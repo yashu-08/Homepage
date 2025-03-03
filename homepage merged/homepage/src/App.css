@@ -1,0 +1,496 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Navbar Styling */
+nav {
+  position: fixed; /* Keeps navbar at the top */
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: #1A1A4A; /* Dark blue background */
+  color: white;
+  padding: 16px 32px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid #6B46C1; /* Purple border */
+  z-index: 1000; /* Ensure navbar stays above other elements */
+}
+
+/* Navbar Links */
+nav ul {
+  display: flex;
+  gap: 32px;
+  list-style: none;
+}
+
+nav ul li a {
+  color: white;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  transition: color 0.3s ease-in-out;
+}
+
+nav ul li a:hover {
+  color: #D1D5DB; /* Light gray hover effect */
+}
+
+/* Blog Link with External Icon */
+nav ul li a.flex {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* Login Button */
+nav button {
+  border: 1px solid white;
+  background: transparent;
+  color: white;
+  padding: 8px 16px;
+  font-size: 14px;
+  font-weight: 500;
+  border-radius: 6px;
+  transition: all 0.3s ease-in-out;
+}
+
+nav button:hover {
+  background: white;
+  color: black;
+}
+
+/* Fix for Content Overlap */
+main {
+  margin-top: 64px; /* Adjust to prevent navbar overlapping content */
+}
+
+
+/* Header Section */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: 1A1A4A;
+  color: white;
+  padding: 50px 80px;
+  height: 579px;
+  top: 90px;
+  width:1500px;
+
+  
+}
+
+/* Left Content */ 
+.header-content {
+  max-width: 50%;
+}
+
+.header-content h1 {
+  font-size: 2.5rem;
+  font-weight: bold;
+  line-height: 1.3;
+}
+
+.header-content h1 span {
+  color: #FFD700; /* Yellow */
+}
+
+.header-content p {
+  margin-top: 10px;
+  font-size: 1rem;
+  color: #d1d5db; /* Light gray */
+  max-width: 450px;
+}
+
+/* Buttons */
+.header-buttons {
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+  gap: 20px;
+}
+
+.btn {
+  padding: 12px 24px;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-yellow {
+  background-color: #FFD700;
+  color: black;
+  border: none;
+}
+
+.btn-yellow:hover {
+  background-color: #FFC107;
+}
+
+.learning-path {
+  color: white;
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.learning-path:hover {
+  text-decoration: underline;
+}
+
+/* Right Image */
+.header-image {
+  max-width: 45%;
+}
+
+.header-image img {
+  width: 100%;
+  max-width: 400px;
+}
+
+/* Section Styling */
+.stats-partners {
+  background-color: #f5f7fa; /* Light gray background */
+  padding: 40px 80px;
+  text-align: center;
+}
+
+/* Section Styling */
+.stats-partners {
+  background-color: #f5f7fa; /* Light gray background */
+  padding: 30px 60px;
+  text-align: center;
+}
+
+/* Statistics */
+.stats {
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  gap: 60px;
+  margin-bottom: 20px;
+  
+}
+
+.stat-item {
+  text-align: center;
+}
+
+.stat-item h2 {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #111827; /* Dark gray */
+  margin-bottom: 4px;
+}
+.stat-item p {
+  font-size: 0.85rem;
+  color: #6b7280; /* Medium gray */
+  margin: 0;
+}
+
+/* Partners */
+.partners {
+  display: flex;
+  justify-content: center; /* Center alignment */
+  align-items: center;
+  gap: 40px;
+  flex-wrap: wrap;
+  padding-right: 0; /* Remove extra right padding */
+  margin-left: auto; /* Push it towards the right */
+  margin-right: 10%; /* Slightly shift towards right */
+  max-width: 60%; /* Adjust width to position it slightly right */
+  position: relative;
+  top: -40px;
+}
+
+
+
+.partner {
+  font-size: 1rem;
+  font-weight: bold;
+  color: #111827;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+
+/* Icons */
+.partner svg {
+  font-size: 1.4rem;
+  color: #111827;
+}
+
+/* Responsive Styling */
+@media (max-width: 768px) {
+  .stats {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .partners {
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+
+}
+
+/* Benefits Section */
+.benefits-section {
+  text-align: center;
+  padding: 50px 20px;
+  background-color: #f8f9fc;
+}
+
+.benefits-title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 30px;
+}
+
+.benefits-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.benefit-card {
+  background: white;
+  border-radius: 8px;
+  padding: 20px;
+  text-align: left;
+  border: 1px solid #ddd;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.benefit-icon {
+  display: inline-block;
+  font-size: 18px;
+  font-weight: bold;
+  background: blue;
+  color: white;
+  width: 28px;
+  height: 28px;
+  text-align: center;
+  line-height: 28px;
+  border-radius: 5px;
+}
+
+.benefit-title {
+  font-size: 18px;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+.benefit-description {
+  font-size: 14px;
+  color: #555;
+  margin-top: 5px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .benefits-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 500px) {
+  .benefits-grid {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+
+
+/* General Styles */
+body {
+  font-family: 'Arial', sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #ffffff;
+}
+
+/* Testimonials Section */
+.testimonials {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #f5f9ff; /* Light blue background */
+  padding: 50px 80px;
+  border-radius: 10px;
+  width: 100%;
+}
+.testimonial-left {
+  flex: 1;
+  text-align: left; /* Align text to the left */
+  padding-left: auto;
+  padding-right: 50px; /* Move the content to the right */
+}
+
+.testimonial-left h2 {
+  font-size: 24px;
+  font-weight: bold;
+  color: #222;
+  margin-bottom: 10px;
+}
+
+.testimonial-left span {
+  color: #535bf2; /* Blue text */
+  display: block; /* Ensures the span moves to the next line */
+}
+
+.testimonial-left p {
+  font-size: 14px;
+  color: #666;
+  margin-top: 10px;
+}
+
+
+
+.testimonial-right {
+  flex: 2;
+  text-align: left;
+  max-width: 600px;
+}
+
+.testimonial-text {
+  font-size: 18px;
+  font-weight: 500;
+  color: #333;
+  margin-bottom: 15px;
+  line-height: 1.6;
+}
+
+.testimonial-user {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.testimonial-user img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.testimonial-user span {
+  font-size: 16px;
+  font-weight: bold;
+  color: #444;
+}
+
+.testimonial-dots {
+  display: flex;
+  gap: 8px;
+  margin-top: 15px;
+}
+
+.dot {
+  font-size: 10px;
+  color: #ccc;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.dot.active {
+  color: #535bf2; /* Active dot color */
+}
+
+/* General Styles */
+body {
+  @apply bg-white text-gray-900;
+}
+
+/* Header Section */
+header {
+  @apply bg-blue-900 text-white text-center py-10 px-6;
+}
+
+header h1 {
+  @apply text-4xl font-bold;
+}
+
+header p {
+  @apply mt-2 text-lg;
+}
+
+header button {
+  @apply mt-4 bg-yellow-500 text-black px-6 py-3 rounded-lg font-semibold transition-all duration-300 hover:bg-yellow-400;
+}
+
+/* Benefits Section */
+.benefits {
+  @apply py-12 text-center bg-gray-100;
+}
+
+.benefits h2 {
+  @apply text-3xl font-semibold;
+}
+
+.benefits-container {
+  @apply grid grid-cols-1 md:grid-cols-3 gap-6 mt-8;
+}
+
+.benefit-card {
+  @apply p-6 bg-white border border-gray-200 rounded-lg shadow-md hover:shadow-lg transition-all;
+}
+
+.benefit-card h3 {
+  @apply text-xl font-bold;
+}
+
+.benefit-card p {
+  @apply mt-2 text-gray-700;
+}
+
+
+
+
+/* Testimonials Section */
+.testimonials {
+  @apply py-12 text-center bg-gray-100;
+}
+
+.testimonials h2 {
+  @apply text-3xl font-semibold;
+}
+
+.testimonials blockquote {
+  @apply italic text-lg mt-6 text-gray-700;
+}
+
+/* FAQ Section */
+.faq {
+  @apply py-12 text-center;
+}
+
+.faq h2 {
+  @apply text-3xl font-semibold;
+}
+
+.faq-list {
+  @apply mt-6;
+}
+
+.faq-list li {
+  @apply border-b border-gray-300 p-4 text-lg text-gray-800 transition-all hover:bg-gray-100 cursor-pointer;
+}
+
+
+/* Footer */
+footer {
+  @apply bg-blue-900 text-white text-center py-6 mt-10;
+}
+
+footer p {
+  @apply text-lg;
+}
