@@ -11,7 +11,7 @@ import {
   CategoryScale,
 } from "chart.js";
 import ProfileDashboard from "../assets/user1.png";
-import UserProfile from "../assets/user1.png";
+import UserProfile from "../assets/image.png";
 
 ChartJS.register(
   LinearScale,
@@ -25,7 +25,15 @@ ChartJS.register(
 
 const Dashboard = () => {
   const revenueData = {
-    labels: ["Aug 01", "Aug 02", "Aug 03", "Aug 04", "Aug 05", "Aug 06", "Aug 07"],
+    labels: [
+      "Aug 01",
+      "Aug 02",
+      "Aug 03",
+      "Aug 04",
+      "Aug 05",
+      "Aug 06",
+      "Aug 07",
+    ],
     datasets: [
       {
         label: "Revenue",
@@ -38,7 +46,15 @@ const Dashboard = () => {
   };
 
   const profileViewData = {
-    labels: ["Aug 01", "Aug 02", "Aug 03", "Aug 04", "Aug 05", "Aug 06", "Aug 07"],
+    labels: [
+      "Aug 01",
+      "Aug 02",
+      "Aug 03",
+      "Aug 04",
+      "Aug 05",
+      "Aug 06",
+      "Aug 07",
+    ],
     datasets: [
       {
         label: "Profile Views",
@@ -136,11 +152,30 @@ const Dashboard = () => {
       },
     },
   };
-
+  const [sidebarOpen, setSidebarOpen] = useState(false);
   return (
     <div className="flex flex-col md:flex-row min-h-screen">
+      {/* Toggle Button for Mobile */}
+      <header className="bg-white p-4 flex items-center space-x-4 shadow md:hidden">
+        <button
+          className="p-2 rounded focus:outline-none w-fit"
+          onClick={() => setSidebarOpen(!sidebarOpen)}
+        >
+          <div className="space-y-1">
+            <span className="block w-6 h-0.5 bg-black"></span>
+            <span className="block w-6 h-0.5 bg-black"></span>
+            <span className="block w-6 h-0.5 bg-black"></span>
+          </div>
+        </button>
+        <h1 className="text-2xl font-semibold">E-tutor</h1>
+      </header>
+
       {/* Sidebar */}
-      <aside className="w-full md:w-64 bg-[#1E1E50] text-white p-5 h-auto md:h-screen sticky top-0">
+      <aside
+        className={`${
+          sidebarOpen ? "block" : "hidden"
+        } w-full md:w-64 bg-[#1E1E50] text-white p-5 h-auto md:h-screen sticky top-0 md:block`}
+      >
         <div className="p-4 font-bold text-lg border-b border-gray-700">
           E-tutor
         </div>
@@ -168,11 +203,14 @@ const Dashboard = () => {
           <div className="flex items-center">
             <h1 className="text-2xl font-semibold mr-8">Dashboard</h1>
           </div>
+
           <div className="flex items-center">
+            {/* Search Input */}
             <div className="relative mr-4">
               <input
                 type="text"
                 placeholder="Search..."
+                aria-label="Search"
                 className="border rounded-full py-2 px-4 focus:outline-none focus:ring focus:border-blue-300"
               />
               <svg
@@ -190,10 +228,13 @@ const Dashboard = () => {
                 />
               </svg>
             </div>
+
+            {/* User Profile */}
             <img
-              src={'User Profile'}
-              alt="User  Profile"
+              src={UserProfile}
+              alt="User Profile"
               className="w-10 h-10 rounded-full cursor-pointer"
+              aria-label="User Profile"
             />
           </div>
         </header>
@@ -220,49 +261,47 @@ const Dashboard = () => {
             </div>
           </div>
 
-          <div className="bg-[#1E1E50] p-6 shadow rounded-lg mt-4">
-            <div className="flex justify-between items-center mb-4">
-              <div className="flex items-center">
-                <img
-                  src={ProfileDashboard}
-                  alt="Vako Shvili"
-                  className="w-12 h-12 rounded-full mr-3"
-                />
-                <div>
-                  <div className="font-semibold text-white">Vako Shvili</div>
-                  <div className="text-sm text-white">vako.shvili@gmail.com</div>
-                </div>
-              </div>
-              <div className="flex items-center">
-                <div className="mr-3 text-white">{steps}/4 Steps</div>
-                <div className="mr-3 text-white flex items-center">
-                  <div className="bg-gray-700 rounded-full h-4 w-24 mr-2">
-                    <div
-                      className="bg-green-500 rounded-full h-4"
-                      style={{ width: `${progressPercentage}%` }}
-                    ></div>
-                  </div>
-                  {progressPercentage}% Completed
-                </div>
-                <button className="bg-[#FF6600] hover:bg-[#CC5200] text-white font-bold py-2 px-4 rounded">
-                  Edit Biography
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-4 w-4 ml-2 inline-block"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M19 9l-7 7-7-7"
-                    />
-                  </svg>
-                </button>
+          <div className="bg-[#1E1E50] p-6 shadow rounded-lg mt-4 text-white flex justify-between items-center flex-wrap">
+            <div className="flex items-center">
+              <img
+                src={ProfileDashboard}
+                alt="Vako Shvili"
+                className="w-12 h-12 rounded-full mr-3"
+              />
+              <div>
+                <div className="font-semibold">Vako Shvili</div>
+                <div className="text-sm">vako.shvili@gmail.com</div>
               </div>
             </div>
+            <div className="flex items-center mt-4 md:mt-0">
+              <div className="mr-3">{steps}/4 Steps</div>
+              <div className="flex items-center">
+                <div className="bg-gray-700 rounded-full h-4 w-24 mr-2">
+                  <div
+                    className="bg-green-500 rounded-full h-4"
+                    style={{ width: `${progressPercentage}%` }}
+                  ></div>
+                </div>
+                <div className="ml-2">{progressPercentage}% Completed</div>
+              </div>
+            </div>
+            <button className="bg-[#FF6600] hover:bg-[#CC5200] text-white font-bold py-2 px-4 rounded flex items-center mt-4 md:mt-0 w-fit">
+              Edit Biography
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-4 w-4 ml-2"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M19 9l-7 7-7-7"
+                />
+              </svg>
+            </button>
           </div>
 
           <div className="bg-white p-6 shadow rounded-lg mb-4">
@@ -275,8 +314,8 @@ const Dashboard = () => {
                 Kevin comments on your lecture "What is UX in 2021" - Just now
               </div>
               <div>
-                John gives a 5-star rating on your course "2021 UX Design" - 5 min
-                ago
+                John gives a 5-star rating on your course "2021 UX Design" - 5
+                min ago
               </div>
               <div>
                 Sraboni purchases your course "2021 UX Design" - 6 min ago
@@ -286,22 +325,46 @@ const Dashboard = () => {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-            <div className="bg-white p-6 shadow rounded-lg">
+            <div className="bg-white p-6 shadow rounded-lg h-64">
+              {" "}
+              {/* Set container height */}
               <h3 className="text-lg font-bold">Revenue</h3>
               <div className="flex justify-between mb-4">
                 <div>This Month</div>
                 <div className="text-lg font-semibold">$1,769</div>
               </div>
-              <Line data={revenueData} options={options} height={300} />
+              <div className="h-40">
+                {" "}
+                {/* Limit chart height */}
+                <Line
+                  data={revenueData}
+                  options={{
+                    ...options,
+                    maintainAspectRatio: false, // Ensure the chart stretches within the container
+                  }}
+                />
+              </div>
             </div>
 
-            <div className="bg-white p-6 shadow rounded-lg">
+            <div className="bg-white p-6 shadow rounded-lg h-64">
+              {" "}
+              {/* Set container height */}
               <h3 className="text-lg font-bold">Profile View</h3>
               <div className="flex justify-between mb-4">
                 <div>Today</div>
                 <div className="text-lg font-semibold">7,443</div>
               </div>
-              <Line data={profileViewData} options={options} height={300} />
+              <div className="h-40">
+                {" "}
+                {/* Limit chart height */}
+                <Line
+                  data={profileViewData}
+                  options={{
+                    ...options,
+                    maintainAspectRatio: false, // Ensure the chart stretches within the container
+                  }}
+                />
+              </div>
             </div>
           </div>
 
