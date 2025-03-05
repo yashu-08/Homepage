@@ -1,5 +1,9 @@
 import React, { useState } from 'react';
-import { ChevronLeft, ChevronRight, ChevronDown, Search, Bell, Settings, User } from 'lucide-react';
+import { 
+  ChevronLeft, ChevronRight, ChevronDown, Search, Bell, Settings, User, Menu, X 
+} from 'lucide-react'; // ✅ Single import statement
+
+
 import loginStats from '../assets/login_stats.png';
 import courseView from '../assets/course_view.png';
 import interactionRate from '../assets/interaction_rate.png';
@@ -10,37 +14,53 @@ import revenueChart from '../assets/monthly_revenue.png';
 
 
 const Dashboard = () => {
-  const [currentPage, setCurrentPage] = useState(1);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   return (
     <div className="min-h-screen bg-white">
-      {/* Header */}
-      <header className="bg-indigo-900 text-white py-3 px-4 flex items-center justify-between">
-        <div className="flex items-center">
-          <h1 className="text-lg font-bold">[EdTech Solution]</h1>
-          <nav className="ml-8">
-            <ul className="flex space-x-4">
-              <li className="font-semibold">Dashboard</li>
-              <li className="text-gray-300">Reports</li>
-              <li className="text-gray-300">Analytics</li>
-              <li className="text-gray-300">Settings</li>
-            </ul>
-          </nav>
+       <header className="bg-indigo-900 text-white py-3 px-4 flex items-center justify-between">
+      {/* Left Section */}
+      <div className="flex items-center w-full md:w-auto">
+        <h1 className="text-lg font-bold">[EdTech Solution]</h1>
+        {/* Mobile Menu Button */}
+        <button
+          className="ml-auto md:hidden"
+          onClick={() => setMenuOpen(!menuOpen)}
+        >
+          {menuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+        </button>
+      </div>
+
+      {/* Navigation */}
+      <nav
+        className={`absolute top-14 left-0 w-full bg-indigo-900 p-4 md:static md:flex md:items-center md:w-auto ${
+          menuOpen ? "block" : "hidden"
+        }`}
+      >
+        <ul className="flex flex-col md:flex-row md:space-x-4">
+          <li className="font-semibold py-2 md:py-0">Dashboard</li>
+          <li className="text-gray-300 py-2 md:py-0">Reports</li>
+          <li className="text-gray-300 py-2 md:py-0">Analytics</li>
+          <li className="text-gray-300 py-2 md:py-0">Settings</li>
+        </ul>
+      </nav>
+
+      {/* Right Section */}
+      <div className="hidden md:flex items-center space-x-4">
+        {/* Search Input */}
+        <div className="relative">
+          <input
+            type="text"
+            placeholder="Search"
+            className="py-1 px-3 pr-8 rounded text-sm text-black"
+          />
+          <Search className="absolute right-2 top-1.5 h-4 w-4 text-gray-500" />
         </div>
-        <div className="flex items-center space-x-4">
-          <div className="relative">
-            <input
-              type="text"
-              placeholder="Search"
-              className="py-1 px-3 pr-8 rounded text-sm text-black"
-            />
-            <Search className="absolute right-2 top-1.5 h-4 w-4 text-gray-500" />
-          </div>
-          <Bell className="h-5 w-5" />
-          <Settings className="h-5 w-5" />
-          <User className="h-5 w-5" />
-        </div>
-      </header>
+        <Bell className="h-5 w-5" />
+        <Settings className="h-5 w-5" />
+        <User className="h-5 w-5" />
+      </div>
+    </header>
   
       {/* Main Content */}
       <main className="p-6">
@@ -126,22 +146,21 @@ const Dashboard = () => {
         <div className="p-4 bg-white rounded-lg shadow-md w-full">
   <div className="grid grid-cols-1 md:grid-cols-2 gap-2 items-center"></div>
         
-        
   <div className="p-4 bg-white rounded-lg shadow-md w-full max-w-[700px]">
-  {/* Grid Container - Side by Side Layout */}
-  <div className="grid grid-cols-2 gap-3 items-start">
+  {/* Grid Container - Responsive Layout */}
+  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 items-start">
     
-    {/* Total Revenue - Slightly Larger */}
+    {/* Total Revenue */}
     <div className="p-3 bg-gray-50 rounded-lg shadow-sm flex flex-col items-start w-full">
       <h3 className="text-base font-medium text-gray-700">Total Revenue</h3>
       <p className="text-xl font-bold my-0">$30,000</p>
       <p className="text-sm text-gray-500">Previous Month: $25,000</p>
-      <button className="bg-indigo-600 text-white py-1 px-3 rounded text-xs w-24">
+      <button className="bg-indigo-600 text-white py-1 px-3 rounded text-xs w-full sm:w-24">
         Download
       </button>
     </div>
 
-    {/* Monthly Revenue - Slightly Larger */}
+    {/* Monthly Revenue */}
     <div className="p-3 bg-gray-50 rounded-lg shadow-sm flex flex-col items-start w-full">
       <h3 className="text-base font-medium text-gray-700">Monthly Revenue</h3>
       <img
@@ -149,7 +168,7 @@ const Dashboard = () => {
         alt="Monthly Revenue Chart"
         className="w-full max-w-[180px] rounded-lg shadow-md my-1"
       />
-      <button className="bg-indigo-600 text-white py-1 px-3 rounded text-xs w-24">
+      <button className="bg-indigo-600 text-white py-1 px-3 rounded text-xs w-full sm:w-24">
         Download
       </button>
     </div>
@@ -157,174 +176,148 @@ const Dashboard = () => {
   </div>
 </div>
 
+ {/* Tabs - Scrollable on Small Screens */}
+ <div className="border-b pb-2 mb-2 mt-3 overflow-x-auto">
+        <ul className="flex space-x-6 sm:space-x-20 text-sm whitespace-nowrap">
+          <li className="font-medium text-indigo-600 cursor-pointer">Manage Subscription</li>
+          <li className="font-medium text-indigo-600 cursor-pointer">Course Revenue</li>
+          <li className="font-medium text-indigo-600 cursor-pointer">Transaction History</li>
+        </ul>
+      </div>
 
-      {/* Tabs */}
-<div className="border-b pb-2 mb-2 mt-3"> 
-  <ul className="flex space-x-20 text-sm">
-    <li className="font-medium text-indigo-600 cursor-pointer">Manage Subscription</li>
-    <li className="font-medium text-indigo-600 cursor-pointer">Course Revenue</li>
-    <li className="font-medium text-indigo-600 cursor-pointer">Transaction History</li>
-  </ul>
+      {/* Course Revenue Table - Scrollable on Mobile */}
+      <div className="overflow-x-auto">
+        <table className="w-full min-w-[600px] text-sm border-collapse mb-6">
+          <thead>
+            <tr className="text-left text-gray-600 border-b">
+              <th className="py-3">Course Name</th>
+              <th className="py-3">User</th>
+              <th className="py-3">Transaction Date</th>
+              <th className="py-3">Amount</th>
+              <th className="py-3">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {["Introduction to Python", "Data Science 101", "Web Development Bootcamp"].map((course, index) => (
+              <tr key={index} className="border-b">
+                <td className="py-3">{course}</td>
+                <td>John Doe</td>
+                <td>2023-10-0{index + 1}</td>
+                <td>$99</td>
+                <td>
+                  <button className="bg-indigo-600 text-white py-1 px-3 rounded text-xs">View Details</button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      {/* Subscription Table - Scrollable on Mobile */}
+      <div className="overflow-x-auto">
+        <table className="w-full min-w-[600px] text-sm border-collapse">
+          <thead>
+            <tr className="text-left text-gray-600 border-b">
+              <th className="py-3">Subscription ID</th>
+              <th className="py-3">User Name</th>
+              <th className="py-3">User Type</th>
+              <th className="py-3">Payment Method</th>
+              <th className="py-3">Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            {["SUB-001", "SUB-002", "SUB-003"].map((sub, index) => (
+              <tr key={index} className="border-b">
+                <td className="py-3">{sub}</td>
+                <td>{["John Doe", "Jane Smith", "Michael Johnson"][index]}</td>
+                <td>
+                  <div className={`h-6 w-6 rounded-full ${index === 2 ? "bg-green-500" : "bg-purple-500"}`}></div>
+                </td>
+                <td>{["Credit Card", "PayPal", "Bank Transfer"][index]}</td>
+                <td className="flex items-center">
+                  <span className="mr-2">{index !== 1 ? "Active" : "Inactive"}</span>
+                  <ChevronDown className="h-4 w-4" />
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>      
 </div>
-
-      {/* Course Revenue Table */}
-      <table className="w-full text-sm border-collapse mb-6">
-        <thead>
-          <tr className="text-left text-gray-600 border-b">
-            <th className="py-3">Course Name</th>
-            <th className="py-3">User</th>
-            <th className="py-3">Transaction Date</th>
-            <th className="py-3">Amount</th>
-            <th className="py-3">Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {["Introduction to Python", "Data Science 101", "Web Development Bootcamp"].map((course, index) => (
-            <tr key={index} className="border-b">
-              <td className="py-3">{course}</td>
-              <td>John Doe</td>
-              <td>2023-10-0{index + 1}</td>
-              <td></td>
-              <td>
-                <button className="bg-indigo-600 text-white py-1 px-3 rounded text-xs">View Details</button>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-
-      {/* Subscription Table */}
-      <table className="w-full text-sm border-collapse">
-        <thead>
-          <tr className="text-left text-gray-600 border-b">
-            <th className="py-3">Subscription ID</th>
-            <th className="py-3">User Name</th>
-            <th className="py-3">User Type</th>
-            <th className="py-3">Payment Method</th>
-            <th className="py-3">Status</th>
-          </tr>
-        </thead>
-        <tbody>
-          {["SUB-001", "SUB-002", "SUB-003"].map((sub, index) => (
-            <tr key={index} className="border-b">
-              <td className="py-3">{sub}</td>
-              <td>{["John Doe", "Jane Smith", "Michael Johnson"][index]}</td>
-              <td>
-  <div className={`h-6 w-6 rounded-full ${index === 2 ? 'bg-green-500' : 'bg-purple-500'}`}></div>
-</td>
-
-              <td>{["Credit Card", "PayPal", "Bank Transfer"][index]}</td>
-              <td className="flex items-center">
-                <span className="mr-2">{index !== 1 ? "Active" : "Inactive"}</span>
-                <ChevronDown className="h-4 w-4" />
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
-    <div className="p-4">
+<div className="p-4 max-w-full">
   {/* Instructor Performance Section */}
-  <h2 className="text-lg font-semibold mb-2">Instructor Performance</h2>
-  
-  <p className="text-sm mb-1">Effectiveness Ratings</p>
-  <p className="text-sm mb-4">Feedback Summary</p>
+  <h2 className="text-base sm:text-lg font-semibold mb-2">Instructor Performance</h2>
+
+  <p className="text-sm sm:text-base mb-1">Effectiveness Ratings</p>
+  <p className="text-sm sm:text-base mb-4">Feedback Summary</p>
 
   {/* Student Engagement Section */}
-  <h2 className="text-lg font-semibold mb-2">Student Engagement</h2>
-  
-  <p className="text-sm mb-1">Participation</p>
-  <p className="text-sm mb-1">Statistics</p>
-  <p className="text-sm">Assessment Feedback</p>
-</div>
+  <h2 className="text-base sm:text-lg font-semibold mb-2">Student Engagement</h2>
 
-<div className="p-6">
+  <div className="flex flex-col gap-1">
+    <p className="text-sm sm:text-base">Participation</p>
+    <p className="text-sm sm:text-base">Statistics</p>
+    <p className="text-sm sm:text-base">Assessment Feedback</p>
+  </div>
+</div>
+<div className="p-4 sm:p-6">
   {/* Header Section */}
-  <div className="flex justify-between items-center mb-6">
-  <h2 className="text-2xl font-semibold">System-wide Notifications</h2>
-  <button className="bg-indigo-600 text-white py-2 px-5 rounded-lg text-sm ml-auto w-fit">
-    Mark all as read
-  </button>
-</div>
+  <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-4 sm:mb-6">
+    <h2 className="text-lg sm:text-2xl font-semibold">System-wide Notifications</h2>
+    <button className="bg-indigo-600 text-white py-2 px-4 rounded-lg text-sm w-full sm:w-fit mt-3 sm:mt-0">
+      Mark all as read
+    </button>
+  </div>
 
-  {/* Notifications Grid (2 Columns) */}
-  <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+  {/* Notifications Grid - Responsive */}
+  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-8">
     {/* Left Column */}
-    <div className="space-y-6">
-      <div>
-        <h3 className="font-semibold">Security Alert</h3>
-        <p className="text-gray-600">Unauthorized login attempt detected.</p>
-        <p className="text-xs text-gray-500 mt-1">2 mins ago</p>
-      </div>
-
-      <div>
-        <h3 className="font-semibold">New User Added</h3>
-        <p className="text-gray-600">John Doe was added to the admin group.</p>
-        <p className="text-xs text-gray-500 mt-1">30 mins ago</p>
-      </div>
-
-      <div>
-        <h3 className="font-semibold">Backup Completed</h3>
-        <p className="text-gray-600">The weekly backup was completed.</p>
-        <p className="text-xs text-gray-500 mt-1">3 hours ago</p>
-      </div>
-
-      <div>
-        <h3 className="font-semibold">New Feature</h3>
-        <p className="text-gray-600">Dark mode is now available.</p>
-        <p className="text-xs text-gray-500 mt-1">5 hours ago</p>
-      </div>
-
-      <div>
-        <h3 className="font-semibold">New Policy</h3>
-        <p className="text-gray-600">Updated privacy policy is now in effect.</p>
-        <p className="text-xs text-gray-500 mt-1">8 hours ago</p>
-      </div>
+    <div className="space-y-4 sm:space-y-6">
+      {[
+        { title: "Security Alert", message: "Unauthorized login attempt detected.", time: "2 mins ago" },
+        { title: "New User Added", message: "John Doe was added to the admin group.", time: "30 mins ago" },
+        { title: "Backup Completed", message: "The weekly backup was completed.", time: "3 hours ago" },
+        { title: "New Feature", message: "Dark mode is now available.", time: "5 hours ago" },
+        { title: "New Policy", message: "Updated privacy policy is now in effect.", time: "8 hours ago" }
+      ].map((notification, index) => (
+        <div key={index}>
+          <h3 className="font-semibold">{notification.title}</h3>
+          <p className="text-gray-600">{notification.message}</p>
+          <p className="text-xs text-gray-500 mt-1">{notification.time}</p>
+        </div>
+      ))}
     </div>
 
     {/* Right Column */}
-    <div className="space-y-6">
-      <div>
-        <h3 className="font-semibold">System Update</h3>
-        <p className="text-gray-600">Scheduled maintenance at midnight.</p>
-        <p className="text-xs text-gray-500 mt-1">15 mins ago</p>
-      </div>
-
-      <div>
-        <h3 className="font-semibold">Password Change</h3>
-        <p className="text-gray-600">Your password was changed successfully.</p>
-        <p className="text-xs text-gray-500 mt-1">1 hour ago</p>
-      </div>
-
-      <div>
-        <h3 className="font-semibold">Server Reboot</h3>
-        <p className="text-gray-600">Server will reboot in 5 mins.</p>
-        <p className="text-xs text-gray-500 mt-1">4 hours ago</p>
-      </div>
-
-      <div>
-        <h3 className="font-semibold">Critical Error</h3>
-        <p className="text-gray-600">Database connection failed.</p>
-        <p className="text-xs text-gray-500 mt-1">6 hours ago</p>
-      </div>
-
-      <div>
-        <h3 className="font-semibold">Service Restored</h3>
-        <p className="text-gray-600">Email service is back online.</p>
-        <p className="text-xs text-gray-500 mt-1">10 hours ago</p>
-      </div>
+    <div className="space-y-4 sm:space-y-6">
+      {[
+        { title: "System Update", message: "Scheduled maintenance at midnight.", time: "15 mins ago" },
+        { title: "Password Change", message: "Your password was changed successfully.", time: "1 hour ago" },
+        { title: "Server Reboot", message: "Server will reboot in 5 mins.", time: "4 hours ago" },
+        { title: "Critical Error", message: "Database connection failed.", time: "6 hours ago" },
+        { title: "Service Restored", message: "Email service is back online.", time: "10 hours ago" }
+      ].map((notification, index) => (
+        <div key={index}>
+          <h3 className="font-semibold">{notification.title}</h3>
+          <p className="text-gray-600">{notification.message}</p>
+          <p className="text-xs text-gray-500 mt-1">{notification.time}</p>
+        </div>
+      ))}
     </div>
   </div>
 
 
+
         </div>
       </main>
-      <footer className="border-t py-3 px-6 flex justify-end items-center text-sm text-gray-600">
-  <div className="flex space-x-4 ">
-    <p>Filters:</p>
-    <button className="text-indigo-600 font-medium bg-transparent hover:bg-transparent focus:bg-transparent active:bg-transparent">All</button>
-    <button className="text-gray-800 bg-transparent hover:bg-transparent focus:bg-transparent active:bg-transparent">Comments</button>
-    <button className="text-gray-800 bg-transparent hover:bg-transparent focus:bg-transparent active:bg-transparent">Assignments</button>
+      <footer className="border-t py-3 px-4 sm:px-6 flex flex-col sm:flex-row justify-center sm:justify-end items-center text-sm text-gray-600">
+  <div className="flex flex-col sm:flex-row sm:items-center space-y-2 sm:space-y-0 sm:space-x-4">
+    <p className="text-center sm:text-left">Filters:</p>
+    <div className="flex space-x-2">
+      <button className="text-indigo-600 font-medium bg-transparent hover:text-indigo-800">All</button>
+      <button className="text-gray-800 bg-transparent hover:text-gray-600">Comments</button>
+      <button className="text-gray-800 bg-transparent hover:text-gray-600">Assignments</button>
+    </div>
   </div>
 </footer>
 
