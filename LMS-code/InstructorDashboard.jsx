@@ -167,7 +167,7 @@ const Dashboard = () => {
             <span className="block w-6 h-0.5 bg-black"></span>
           </div>
         </button>
-        <h1 className="text-2xl font-semibold">E-tutor</h1>
+        <h1 className="text-2xl font-semibold">EinfraTech</h1>
       </header>
 
       {/* Sidebar */}
